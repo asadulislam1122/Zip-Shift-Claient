@@ -2,6 +2,7 @@ import React from "react";
 import Logo from "../../../Components/Logo/Logo";
 import { Link, NavLink } from "react-router";
 import useAuth from "../../../Hooks/useAuth";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
   const { user, logout } = useAuth();
@@ -9,7 +10,9 @@ const Navbar = () => {
     logout()
       .then((result) => {
         console.log(result);
-        alert("Log Out SuccessFully");
+        toast.success("Log Out SuccessFully", {
+          autoClose: 1000,
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -19,6 +22,9 @@ const Navbar = () => {
     <>
       <li>
         <NavLink>Survise</NavLink>
+      </li>
+      <li>
+        <NavLink to={"/send_parsel"}>Send-Parsel</NavLink>
       </li>
       <li>
         <NavLink>About Us</NavLink>
@@ -76,6 +82,13 @@ const Navbar = () => {
             logIn
           </Link>
         )}
+        {/*  */}
+        <Link to={"/raider"}>
+          {" "}
+          <button className="btn text-black btn-primary ml-2">
+            Be A Raider
+          </button>
+        </Link>
       </div>
     </div>
   );

@@ -41,6 +41,7 @@ const AuthProvaider = ({ children }) => {
   useEffect(() => {
     const unSubCribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      setLoading(false);
     });
     return () => {
       unSubCribe();

@@ -1,6 +1,7 @@
 import React from "react";
 import useAuth from "../Hooks/useAuth";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 const SosialButton = () => {
   const { googleLogin } = useAuth();
@@ -9,6 +10,7 @@ const SosialButton = () => {
     googleLogin()
       .then((result) => {
         console.log(result.user);
+        toast.success("Google Login Successfull");
         navigation("/");
       })
       .catch((err) => {

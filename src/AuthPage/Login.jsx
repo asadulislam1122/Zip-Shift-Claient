@@ -1,10 +1,12 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../Hooks/useAuth";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import SosialButton from "./SosialButton";
+import { toast } from "react-toastify";
 
 const Login = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -18,9 +20,14 @@ const Login = () => {
     signInUser(data.email, data.password)
       .then((result) => {
         console.log(result.user);
+        toast.success("Login Suscessfull", {
+          autoClose: "1000",
+        });
+        navigate("/");
       })
       .catch((err) => {
         console.log(err);
+        toast.error(err.message);
       });
   };
 
@@ -91,84 +98,3 @@ const Login = () => {
 };
 
 export default Login;
-
-// import React from "react";
-// import { useForm } from "react-hook-form";
-// import useAuth from "../Hooks/useAuth";
-// import { Link } from "react-router";
-
-// const Login = () => {
-//   const {
-//     register,
-//     handleSubmit,
-//     formState: { errors },
-//   } = useForm();
-//   //
-//   const { signInUser } = useAuth();
-//   const handleLogin = (data) => {
-//     console.log(data);
-//     signInUser(data.email, data.password)
-//       .then((result) => {
-//         console.log(result.user);
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//   };
-//   return (
-//     <div className="card mx-auto  bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-//       <h2 className="font-semibold text-secondary text-3xl text-center">
-//         Welcome Back <br /> Plece Login
-//       </h2>
-//       <div className="card-body">
-//         <form onSubmit={handleSubmit(handleLogin)}>
-//           <fieldset className="fieldset">
-//             {/* email */}
-//             <label className="label">Email</label>
-//             <input
-//               type="email"
-//               {...register("email", { required: true })}
-//               className="input"
-//               placeholder="Email"
-//             />
-//             {errors.email?.type === "required" && (
-//               <p className="text-red-500"> Email is Requared !!!</p>
-//             )}
-//             {/* password */}
-//             <label className="label">Password</label>
-//             <input
-//               type="password"
-//               {...register("password", { required: true, minLength: 6 })}
-//               className="input"
-//               placeholder="Password"
-//             />
-//             {errors.password?.type === "required" && (
-//               <p className="text-red-500">Password is Requared !!</p>
-//             )}
-//             {errors.password?.type === "minLength" && (
-//               <p className="text-red-600">Password must be 6 Ceracter</p>
-//             )}
-//             {/*  */}
-//             <div>
-//               <a className="link link-hover">Forgot password?</a>
-//             </div>
-//             <button className="btn btn-primary text-secondary mt-4">
-//               Login
-//             </button>
-//             <p className="text-center text-secondary">
-//               Create a new Account ....{" "}
-//               <Link
-//                 className="font-semibold text-blue-700 ml-4 hover:text-green-600"
-//                 to={"/register"}
-//               >
-//                 Register
-//               </Link>
-//             </p>
-//           </fieldset>
-//         </form>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Login;

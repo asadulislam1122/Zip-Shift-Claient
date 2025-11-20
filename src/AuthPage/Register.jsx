@@ -1,23 +1,31 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../Hooks/useAuth";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import SosialButton from "./SosialButton";
+import { toast } from "react-toastify";
 
 const Register = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { registerUser, signInUser } = useAuth();
+  const { registerUser } = useAuth();
 
   const handleRegister = (data) => {
     registerUser(data.email, data.password)
       .then((result) => {
         console.log(result.user);
+        toast.success("Register Suscessfull", {
+          autoClose: 1000,
+        });
+        navigate("/");
       })
       .catch((err) => {
         console.log(err);
+        toast.error(err.message);
       });
   };
 
@@ -30,6 +38,32 @@ const Register = () => {
 
         <form onSubmit={handleSubmit(handleRegister)} className="space-y-4">
           <fieldset className="fieldset space-y-2">
+            {/* name */}
+            {/* <label className="label font-semibold">Name</label>
+            <input
+              type="text"
+              {...register("name", { required: true })}
+              className="input w-full border border-gray-300 focus:border-secondary focus:ring-2 focus:ring-secondary/30 rounded-lg p-2"
+              placeholder="Your Name"
+            />
+            {errors.name?.type === "required" && (
+              <p className="text-red-500 text-sm">Name is required</p>
+            )} */}
+
+            {/* photo  */}
+
+            {/* <label className="label font-semibold">Photo</label>
+            <input
+              type="file"
+              {...register("photo", { required: true })}
+              className="file-input w-full border border-gray-300 focus:border-secondary focus:ring-2 focus:ring-secondary/30 rounded-lg p-2"
+              placeholder="Enter your email"
+            />
+            {errors.photo?.type === "required" && (
+              <p className="text-red-500 text-sm">Photo is required</p>
+            )} */}
+            {/*  */}
+            {/* email */}
             <label className="label font-semibold">Email</label>
             <input
               type="email"
@@ -40,7 +74,7 @@ const Register = () => {
             {errors.email?.type === "required" && (
               <p className="text-red-500 text-sm">Email is required</p>
             )}
-
+            {/* password */}
             <label className="label font-semibold mt-3">Password</label>
             <input
               type="password"
@@ -88,103 +122,10 @@ const Register = () => {
             </p>
           </fieldset>
         </form>
+        <SosialButton></SosialButton>
       </div>
     </div>
   );
 };
 
 export default Register;
-
-// import React from "react";
-// import { useForm } from "react-hook-form";
-// import useAuth from "../Hooks/useAuth";
-// import { Link } from "react-router";
-
-// const Register = () => {
-//   const {
-//     register,
-//     handleSubmit,
-//     formState: { errors },
-//   } = useForm();
-//   // useAuth
-//   const { registerUser, signInUser } = useAuth();
-//   const handleRegister = (data) => {
-//     // console.log(data);
-//     registerUser(data.email, data.password)
-//       .then((result) => {
-//         console.log(result.user);
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//   };
-//   return (
-//     <div className="flex justify-center ">
-//       <h3 className="text-center text-3xl text-secondary mb-6 flex justify-center items-center mr-3">
-//         Plece Login
-//       </h3>
-//       <form onSubmit={handleSubmit(handleRegister)}>
-//         <fieldset className="fieldset">
-//           {/* email */}
-//           <label className="label">Email</label>
-//           <input
-//             type="email"
-//             {...register("email", { required: true })}
-//             className="input"
-//             placeholder="Email"
-//           />
-//           {errors.email?.type === "required" && (
-//             <p className="text-red-500">Email is Required</p>
-//           )}
-//           {/* password */}
-//           <label className="label">Password</label>
-//           <input
-//             type="password"
-//             {...register("password", {
-//               required: true,
-//               minLength: 6,
-//               pattern:
-//                 /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+={}[\]|\\:;"'<>,.?/~`]).{6,}$/,
-//             })}
-//             className="input"
-//             placeholder="Password"
-//           />
-//           {errors.password?.type === "required" && (
-//             <p className="text-red-500">Password is Requirde !!!!</p>
-//           )}
-//           {errors.password?.type === "minLength" && (
-//             <p
-//               className="
-//             text-red-500"
-//             >
-//               password must be 6 ceracter or Longer!!!!
-//             </p>
-//           )}
-//           {errors.password?.type === "pattern" && (
-//             <p className="text-red-500">
-//               Password hase been uppuercase lowercase latter simbole !!!!!!!
-//             </p>
-//           )}
-//           {/* forget */}
-//           <div>
-//             <a className="link link-hover">Forgot password?</a>
-//           </div>
-//           <button className="btn md:w-[320px] btn-primary text-black mt-4">
-//             Register
-//           </button>
-//           <p className="text-secondary">
-//             Already have A Account ...{" "}
-//             <Link
-//               to={"/login"}
-//               className="font-semibold text-blue-500 hover:text-green-500"
-//             >
-//               Login
-//             </Link>
-//           </p>
-//         </fieldset>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default Register;

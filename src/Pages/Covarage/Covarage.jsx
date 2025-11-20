@@ -7,7 +7,7 @@ import { useLoaderData } from "react-router";
 // import "../../../node_modules/leaflet/dist/leaflet.css";
 const Covarage = () => {
   const locationData = useLoaderData();
-  console.log(locationData);
+  // console.log(locationData);
   return (
     <div>
       <h2 className=" mt-6 font-bold text-3xl text-pink-600">
