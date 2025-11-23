@@ -1,17 +1,56 @@
 import React from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { useLoaderData } from "react-router";
+import Swal from "sweetalert2";
 
 const SendParcel = () => {
   const {
     register,
     handleSubmit,
-    watch,
+    control,
     formState: { errors },
   } = useForm();
 
   const handleSendParsel = (data) => {
     console.log(data);
+    const isDocument = data.parcelType === "document";
+    const isSameDistrict = data.senderDistricts === data.receiverDistrict;
+    const parselWeight = parseFloat(data.parcelWeight);
+    // console.log(sameDistrict);
+    let cost = 0;
+    if (isDocument) {
+      cost = isSameDistrict ? 60 : 80;
+    } else {
+      if (parselWeight < 3) {
+        cost = isSameDistrict ? 110 : 150;
+      } else {
+        const minCharge = isSameDistrict ? 110 : 150;
+        const extraWeight = parselWeight - 3;
+        const extraCharge = isSameDistrict
+          ? extraWeight * 40
+          : extraWeight * 40 + 40;
+        cost = minCharge + extraCharge;
+      }
+    }
+    console.log("cost", cost);
+    //
+    Swal.fire({
+      title: "Agree With the Cost ?",
+      text: `You will be Charge (${cost}) taka`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your Cost  has been deleted.",
+          icon: "success",
+        });
+      }
+    });
   };
   const serviceSenter = useLoaderData();
   //   console.log(serviceSenter);
@@ -19,9 +58,11 @@ const SendParcel = () => {
 
   const regions = [...new Set(regionsDuplicate)];
 
-  const senderRegion = watch("senderRegion");
+  const senderRegion = useWatch({ control, name: "senderRegion" });
   //   console.log(regions);
+  const receiverRegion = useWatch({ control, name: "receiverRegion" });
   //
+
   const districtByRegions = (region) => {
     const regionsDestrict = serviceSenter.filter((c) => c.region === region);
     const districts = regionsDestrict.map((d) => d.district);
@@ -138,16 +179,6 @@ const SendParcel = () => {
               </select>
             </fieldset>
 
-            {/* sender Address */}
-
-            <label className="label mt-4">Sender Address</label>
-            <input
-              type="text"
-              {...register("senderAddress")}
-              className="input w-full "
-              placeholder="Sender Address"
-            />
-
             {/* sender Phone Number   */}
 
             <label className="label mt-4">Sender Phone No</label>
@@ -189,24 +220,43 @@ const SendParcel = () => {
               className="input w-full"
               placeholder="asadulislam@gmail.com"
             />
-            {/* Receiver District */}
 
-            <label className="label mt-4">Receiver District</label>
-            <input
-              type="text"
-              {...register("receiverDistrict")}
-              className="input w-full"
-              placeholder="Receiver Destrict"
-            />
-            {/* Receiver Address */}
+            {/* Receiver Region */}
+            <fieldset className="fieldset">
+              <legend className="fieldset-legend">Receiver Region</legend>
+              <select
+                {...register("receiverRegion")}
+                defaultValue="Pick a region"
+                className="select w-full"
+              >
+                <option disabled={true}>Pick a region</option>
 
-            <label className="label mt-4">Receiver Address</label>
-            <input
-              type="text"
-              {...register("receiverAddress")}
-              className="input w-full "
-              placeholder="Receiver Address"
-            />
+                {regions.map((r, i) => (
+                  <option key={i} value={r}>
+                    {r}
+                  </option>
+                ))}
+              </select>
+            </fieldset>
+
+            {/* receiver District */}
+
+            <fieldset className="fieldset">
+              <legend className="fieldset-legend">Receiver District</legend>
+              <select
+                {...register("receiverDistrict")}
+                defaultValue="Pick a District"
+                className="select w-full"
+              >
+                <option disabled={true}>Pick a District</option>
+
+                {districtByRegions(receiverRegion).map((d, i) => (
+                  <option key={i} value={d}>
+                    {d}
+                  </option>
+                ))}
+              </select>
+            </fieldset>
 
             {/* Receiver Phone Number   */}
 
