@@ -6,7 +6,7 @@ const Logo = () => {
     <div className="flex justify-center text-center">
       <img src={logo} alt="" />
       <Link to={"/"}>
-        <p className="mt-6 text-3xl text-secondary font-semibold">TradeFlow</p>
+        <p className="mt-6 text-3xl text-secondary font-semibold ">TradeFlow</p>
       </Link>
     </div>
   );

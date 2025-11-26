@@ -37,6 +37,7 @@ const SendParcel = () => {
       }
     }
     console.log("cost", cost);
+    data.cost = cost;
     //
     Swal.fire({
       title: "Agree With the Cost ?",
@@ -115,6 +116,7 @@ const SendParcel = () => {
               {...register("parcelName")}
               className="input w-full"
               placeholder="Parcel name"
+              required
             />
           </fieldset>
           <fieldset className="fieldset">
@@ -124,6 +126,7 @@ const SendParcel = () => {
               {...register("parcelWeight")}
               className="input w-full"
               placeholder="Parcel Weight"
+              required
             />
           </fieldset>
         </div>
@@ -160,6 +163,7 @@ const SendParcel = () => {
                 {...register("senderRegion")}
                 defaultValue="Pick a region"
                 className="select w-full"
+                required
               >
                 <option disabled={true}>Pick a region</option>
 
@@ -178,6 +182,7 @@ const SendParcel = () => {
                 {...register("senderDistricts")}
                 defaultValue="Pick a districts"
                 className="select w-full"
+                required
               >
                 <option disabled={true}>Pick a Districts</option>
 
@@ -221,6 +226,7 @@ const SendParcel = () => {
               {...register("receiverName")}
               className="input w-full"
               placeholder="Receiver name"
+              required
             />
             {/* Receiver Email */}
             <label className="label mt-6">Receiver Email</label>
@@ -229,6 +235,7 @@ const SendParcel = () => {
               {...register("receiverEmail")}
               className="input w-full"
               placeholder="asadulislam@gmail.com"
+              required
             />
 
             {/* Receiver Region */}
@@ -238,6 +245,7 @@ const SendParcel = () => {
                 {...register("receiverRegion")}
                 defaultValue="Pick a region"
                 className="select w-full"
+                required
               >
                 <option disabled={true}>Pick a region</option>
 
@@ -257,6 +265,7 @@ const SendParcel = () => {
                 {...register("receiverDistrict")}
                 defaultValue="Pick a District"
                 className="select w-full"
+                required
               >
                 <option disabled={true}>Pick a District</option>
 
@@ -276,6 +285,7 @@ const SendParcel = () => {
               {...register("receiverphoneNo")}
               className="input w-full"
               placeholder="Receiver Phone Number"
+              required
             />
 
             {/* pickup Instruction */}
@@ -291,12 +301,14 @@ const SendParcel = () => {
           {/* Receiver end */}
         </div>
         {/* button */}
-        <input
-          className=" btn btn-primary text-secondary
+        <div className="flex justify-end">
+          <input
+            className=" mt-5 mb-4 btn btn-primary text-secondary
         "
-          type="submit"
-          value="Send Parsel"
-        />
+            type="submit"
+            value="Send Parsel"
+          />
+        </div>
       </form>
     </div>
   );

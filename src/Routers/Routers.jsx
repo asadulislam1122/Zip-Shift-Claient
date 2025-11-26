@@ -11,6 +11,7 @@ import Raider from "../Raider/Raider";
 import SendParcel from "../Pages/SendParsel/SendParcel";
 import DashBoardLayout from "../Layout/DashBoardLayout";
 import Myparcels from "../Pages/DashBoard/Myparcels";
+import Payment from "../Pages/DashBoard/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -68,6 +69,10 @@ export const router = createBrowserRouter([
       {
         path: "my-parcels",
         Component: Myparcels,
+      },
+      {
+        path: "payment/:parcelId",
+        Component: Payment,
       },
     ],
   },

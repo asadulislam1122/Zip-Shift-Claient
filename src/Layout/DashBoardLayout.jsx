@@ -74,9 +74,10 @@ const DashBoardLayout = () => {
             {/*
              */}
             <li>
-              <button
+              <Link
+                to={"/dashboard/my-parcels"}
                 className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="Settings"
+                data-tip="My Parcels"
               >
                 {/* Settings icon */}
                 <img
@@ -85,13 +86,8 @@ const DashBoardLayout = () => {
                   alt=""
                 />
 
-                <NavLink
-                  className="is-drawer-close:hidden"
-                  to={"/dashboard/my-parcels"}
-                >
-                  My Parcels
-                </NavLink>
-              </button>
+                <span className="is-drawer-close:hidden">My Parcels</span>
+              </Link>
             </li>
             {/* List item */}
             <li>
