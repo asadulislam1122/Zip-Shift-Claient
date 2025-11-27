@@ -1,10 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const PaymentSuccessFul = () => {
   const [searchParams] = useSearchParams();
+  const [paymentInfo, setPaymentInfo] = useState({});
   const sessionId = searchParams.get("session_id");
+
   console.log(sessionId);
   const axiosSecure = useAxiosSecure();
   //
@@ -14,6 +16,10 @@ const PaymentSuccessFul = () => {
         .patch(`/payment-success?session_id=${sessionId}`)
         .then((res) => {
           console.log(res.data);
+          setPaymentInfo({
+            transactionId: res.data.transactionId,
+            trackingId: res.data.trackingId,
+          });
         });
     }
   }, [sessionId, axiosSecure]);
@@ -42,7 +48,12 @@ const PaymentSuccessFul = () => {
         >
           Payment Successful!
         </h2>
-
+        <p className="mt-3 text-gray-700 text-sm md:text-base">
+          Your Transaction Id: {paymentInfo.transactionId}
+        </p>
+        <p className="mt-3 text-gray-700 text-sm md:text-base">
+          Your Parcel Tracking Id: {paymentInfo.trackingId}
+        </p>
         <p className="mt-3 text-gray-700 text-sm md:text-base">
           Thank you! Your payment has been processed smoothly.
         </p>
