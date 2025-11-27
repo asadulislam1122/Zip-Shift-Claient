@@ -90,7 +90,9 @@ const Myparcels = () => {
                   <td>{parcel.receiverRegion}</td>
                   <td>
                     {parcel.paymentStatus === "paid" ? (
-                      <span className="text-green-500">Paid</span>
+                      <span className="btn btn-sm text-black bg-pink-600">
+                        Paid
+                      </span>
                     ) : (
                       <Link to={`/dashboard/payment/${parcel._id}`}>
                         <button className="btn btn-sm text-black hover:bg-lime-600 btn-primary">

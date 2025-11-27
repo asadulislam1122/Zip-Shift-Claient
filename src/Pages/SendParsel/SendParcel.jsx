@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm, useWatch } from "react-hook-form";
-import { useLoaderData } from "react-router";
+import { useLoaderData, useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
@@ -15,6 +15,7 @@ const SendParcel = () => {
   const { user } = useAuth();
   // console.log(user.email);
   const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
   const handleSendParsel = (data) => {
     console.log(data);
     const isDocument = data.parcelType === "document";
@@ -46,18 +47,37 @@ const SendParcel = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "I Agree!",
+      confirmButtonText: "Confirm!",
     }).then((result) => {
       if (result.isConfirmed) {
         //  save the  parsel info to the database
         axiosSecure.post("/parcels", data).then((res) => {
           console.log("after saving parcels", res.data);
+          if (res.data.insertedId) {
+            navigate("/dashboard/my-parcels");
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title:
+                "<span style='font-size:18px;font-weight:600'>Parcel Created Successfully</span>",
+              html: "<small style='color:#555'>Please complete your payment</small>",
+              background: "rgba(255, 255, 255, 0.85)",
+              backdrop: `
+    rgba(0,0,0,0.1)
+    left top
+    no-repeat
+  `,
+              showConfirmButton: false,
+              timer: 2500,
+              timerProgressBar: true,
+              toast: true,
+              customClass: {
+                popup:
+                  "animate__animated animate__fadeInDown rounded-xl shadow-xl",
+              },
+            });
+          }
         });
-        // Swal.fire({
-        //   title: "Deleted!",
-        //   text: "Your Cost  has been deleted.",
-        //   icon: "success",
-        // });
       }
     });
   };
