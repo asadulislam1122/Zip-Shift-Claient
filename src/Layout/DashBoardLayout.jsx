@@ -88,6 +88,21 @@ const DashBoardLayout = () => {
 
                 <span className="is-drawer-close:hidden">My Parcels</span>
               </Link>
+              {/* payment History */}
+              <Link
+                to={"/dashboard/payment-history"}
+                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                data-tip="Payment History"
+              >
+                {/* Settings icon */}
+                <img
+                  className="w-5"
+                  src="https://img.icons8.com/ios-filled/50/card-in-use.png"
+                  alt=""
+                />
+
+                <span className="is-drawer-close:hidden">Payment History</span>
+              </Link>
             </li>
             {/* List item */}
             <li>

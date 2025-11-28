@@ -1,0 +1,59 @@
+import React from "react";
+import useAuth from "../../Hooks/useAuth";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
+
+const PaymentHistry = () => {
+  const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
+  const { data: payments = [] } = useQuery({
+    queryKey: ["payments", user.email],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/payments?email=${user.email}`);
+      return res.data;
+    },
+  });
+  console.log(payments);
+  return (
+    <div>
+      <h2 className="text-3xl font-semibold text-center mt-4 mb-4 m-4 p-4 text-blue-600">
+        {" "}
+        Payment History: {payments.length}
+      </h2>
+      <div className="overflow-x-auto">
+        <table className="table table-zebra">
+          {/* head */}
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Parcel Name</th>
+              <th>Amount</th>
+              <th>TrackingId</th>
+              <th>TransactionId</th>
+              <th>Paid Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {payments.map((payment, i) => (
+              <tr key={payment._id}>
+                <th>{i + 1}</th>
+                <td>{payment.parcelName}</td>
+                <td> ${payment.amount}</td>
+                <td className="font-semibold text-gray-700">
+                  {payment.trackingId}
+                </td>
+
+                <td className="font-semibold text-gray-700">
+                  {payment.transactionId}
+                </td>
+                <td>{new Date(payment.paidAt).toLocaleDateString()}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
+
+export default PaymentHistry;

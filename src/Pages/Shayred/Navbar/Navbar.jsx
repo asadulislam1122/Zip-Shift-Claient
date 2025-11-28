@@ -26,12 +26,6 @@ const Navbar = () => {
       <li>
         <NavLink to={"/send_parsel"}>Send-Parsel</NavLink>
       </li>
-      <li>
-        <NavLink>About Us</NavLink>
-      </li>
-      <li>
-        <NavLink to={"/coverage"}>Coverage</NavLink>
-      </li>
       {user && (
         <>
           <li>
@@ -39,6 +33,12 @@ const Navbar = () => {
           </li>
         </>
       )}
+      <li>
+        <NavLink to={"/coverage"}>Coverage</NavLink>
+      </li>
+      <li>
+        <NavLink>About Us</NavLink>
+      </li>
     </>
   );
   return (

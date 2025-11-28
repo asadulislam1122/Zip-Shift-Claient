@@ -4,9 +4,11 @@ import useAuth from "../Hooks/useAuth";
 import { Link, useNavigate } from "react-router";
 import SosialButton from "./SosialButton";
 import { toast } from "react-toastify";
-
+// import useAxiosSecure from "../Hooks/useAxiosSecure";
+import axios from "axios";
 const Register = () => {
   const navigate = useNavigate();
+  // const axiosSecure = useAxiosSecure();
   const {
     register,
     handleSubmit,
@@ -17,6 +19,30 @@ const Register = () => {
   const handleRegister = (data) => {
     registerUser(data.email, data.password)
       .then((result) => {
+        // create user in database
+        // const userInfo = {
+        //   email: data.email,
+        // };
+        // axiosSecure.post("/users", userInfo).then((res) => {
+        //   if (res.data.insertedId) {
+        //     console.log("user Created in the database");
+        //   }
+        // });
+
+        const userInfo = {
+          email: data.email,
+        };
+        axios
+          .post("http://localhost:3000/users", userInfo)
+          .then((res) => {
+            if (res.data.insertedId) {
+              console.log("User created in the database");
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+        //
         console.log(result.user);
         toast.success("Register Suscessfull", {
           autoClose: 1000,
