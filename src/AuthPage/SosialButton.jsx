@@ -1,17 +1,42 @@
 import React from "react";
 import useAuth from "../Hooks/useAuth";
-import { useNavigate } from "react-router";
+import { Navigate, useNavigate } from "react-router";
 import { toast } from "react-toastify";
+// import useAxiosSecure from "../Hooks/useAxiosSecure";
+import axios from "axios";
 
 const SosialButton = () => {
   const { googleLogin } = useAuth();
-  const navigation = useNavigate();
+  const navigate = useNavigate();
+  // const axiosSecure = useAxiosSecure();
   const goggleButtonLogin = () => {
     googleLogin()
       .then((result) => {
         console.log(result.user);
         toast.success("Google Login Successfull");
-        navigation("/");
+
+        // crate user in the database
+        // const userInfo = {
+        //   email: result.user.email,
+        //   displyName: result.user.displyName,
+        //   photoURL: result.photoURL,
+        // };
+        // axiosSecure.post("/users", userInfo).then((res) => {
+        //   console.log("user data has been store", res.data);
+        //   navigation("/");
+        // });
+        const userInfo = {
+          email: result.user.email,
+          displayName: result.user.displayName, // typo ঠিক করা
+          photoURL: result.user.photoURL,
+        };
+
+        axios
+          .post("http://localhost:3000/users", userInfo) // normal axios
+          .then((res) => {
+            console.log("user data has been stored", res.data);
+            navigate("/"); // typo: navigation → navigate
+          });
       })
       .catch((err) => {
         console.log(err);

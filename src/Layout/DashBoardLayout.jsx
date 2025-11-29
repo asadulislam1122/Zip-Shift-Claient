@@ -1,7 +1,9 @@
 import React from "react";
 import { Link, NavLink, Outlet } from "react-router";
+import useRole from "../Hooks/useRole";
 
 const DashBoardLayout = () => {
+  const { role } = useRole();
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
@@ -70,16 +72,13 @@ const DashBoardLayout = () => {
             </li>
 
             {/* my Links */}
-
-            {/*
-             */}
             <li>
               <Link
                 to={"/dashboard/my-parcels"}
                 className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                 data-tip="My Parcels"
               >
-                {/* Settings icon */}
+                {/* PArsel icon */}
                 <img
                   className="w-5"
                   src="https://img.icons8.com/external-smashingstocks-hand-drawn-black-smashing-stocks/99/external-Parcels-shopping-and-commerce-smashingstocks-hand-drawn-black-smashing-stocks.png"
@@ -88,13 +87,15 @@ const DashBoardLayout = () => {
 
                 <span className="is-drawer-close:hidden">My Parcels</span>
               </Link>
-              {/* payment History */}
+            </li>
+            {/* payment History */}
+            <li>
               <Link
                 to={"/dashboard/payment-history"}
                 className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                 data-tip="Payment History"
               >
-                {/* Settings icon */}
+                {/* apyment icon */}
                 <img
                   className="w-5"
                   src="https://img.icons8.com/ios-filled/50/card-in-use.png"
@@ -104,7 +105,49 @@ const DashBoardLayout = () => {
                 <span className="is-drawer-close:hidden">Payment History</span>
               </Link>
             </li>
-            {/* List item */}
+            {role === "admin" && (
+              <>
+                {/* Approve Ridser */}
+                <li>
+                  <Link
+                    to={"/dashboard/approve-riders"}
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Approve Riders"
+                  >
+                    {/* Motor Saikel icon */}
+                    <img
+                      className="w-5"
+                      src="https://img.icons8.com/ios-filled/50/motorcycle.png"
+                      alt=""
+                    />
+
+                    <span className="is-drawer-close:hidden">
+                      Approve Riders
+                    </span>
+                  </Link>
+                </li>
+                {/* Users Management */}
+                <li>
+                  <Link
+                    to={"/dashboard/users-management"}
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Users Management"
+                  >
+                    {/* users-management */}
+                    <img
+                      className="w-5"
+                      src="https://img.icons8.com/ios-filled/50/user.png"
+                      alt=""
+                    />
+
+                    <span className="is-drawer-close:hidden">
+                      Users Management
+                    </span>
+                  </Link>
+                </li>
+              </>
+            )}
+            {/* Setting item */}
             <li>
               <button
                 className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
@@ -137,3 +180,39 @@ const DashBoardLayout = () => {
 };
 
 export default DashBoardLayout;
+
+//
+
+// <li>
+//             <Link
+//               to={"/dashboard/approve-riders"}
+//               className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+//               data-tip="Approve Riders"
+//             >
+//               {/* Motor Saikel icon */}
+//               <img
+//                 className="w-5"
+//                 src="https://img.icons8.com/ios-filled/50/motorcycle.png"
+//                 alt=""
+//               />
+
+//               <span className="is-drawer-close:hidden">Approve Riders</span>
+//             </Link>
+//           </li>
+//           {/* Users Management */}
+//           <li>
+//             <Link
+//               to={"/dashboard/users-management"}
+//               className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+//               data-tip="Users Management"
+//             >
+//               {/* users-management */}
+//               <img
+//                 className="w-5"
+//                 src="https://img.icons8.com/ios-filled/50/user.png"
+//                 alt=""
+//               />
+
+//               <span className="is-drawer-close:hidden">Users Management</span>
+//             </Link>
+//           </li>
