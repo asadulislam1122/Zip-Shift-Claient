@@ -68,7 +68,8 @@ const ApproveRiders = () => {
               <th>Region,Districts</th>
               <th>Bike</th>
               <th>Raider Phone No</th>
-              <th>Status</th>
+              <th>Application Status</th>
+              <th>Work Status</th>
               <th>Date</th>
               <th>Action</th>
             </tr>
@@ -92,6 +93,7 @@ const ApproveRiders = () => {
                 >
                   {rider.status}
                 </td>
+                <td>{rider.workStatus}</td>
                 <td>{new Date(rider.createdAt).toLocaleString()}</td>
                 <td className="flex gap-2">
                   <button onClick={() => handleApprovel(rider)} className="btn">

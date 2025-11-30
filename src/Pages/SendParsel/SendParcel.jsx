@@ -214,6 +214,15 @@ const SendParcel = () => {
               </select>
             </fieldset>
 
+            {/* sender Address */}
+            <label className="label mt-4">Sender Address</label>
+            <input
+              type="text"
+              {...register("senderAddress")}
+              className="input w-full"
+              placeholder="Sender Address"
+            />
+
             {/* sender Phone Number   */}
 
             <label className="label mt-4">Sender Phone No</label>
@@ -296,7 +305,14 @@ const SendParcel = () => {
                 ))}
               </select>
             </fieldset>
-
+            {/* sender Address */}
+            <label className="label mt-4">Receiver Address</label>
+            <input
+              type="text"
+              {...register("receiverAddress")}
+              className="input w-full"
+              placeholder="Receiver Address"
+            />
             {/* Receiver Phone Number   */}
 
             <label className="label mt-4">Receiver Phone No</label>

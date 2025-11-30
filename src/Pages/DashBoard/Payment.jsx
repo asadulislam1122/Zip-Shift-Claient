@@ -78,6 +78,8 @@ const Payment = () => {
     senderDistricts,
     senderEmail,
     senderName,
+    receiverAddress,
+    senderAddress,
     senderRegion,
     senderphoneNo,
   } = parcel;
@@ -146,7 +148,7 @@ const Payment = () => {
                 </p>
                 <p className="flex items-center">
                   <IoLocationSharp className="mr-2 text-gray-500" />{" "}
-                  **Address:** {senderDistricts}, {senderRegion}
+                  **Address:**{senderAddress}, {senderDistricts}, {senderRegion}
                 </p>
               </div>
             </div>
@@ -172,7 +174,8 @@ const Payment = () => {
                 </p>
                 <p className="flex items-center">
                   <IoLocationSharp className="mr-2 text-gray-500" />{" "}
-                  **Address:** {receiverDistrict}, {receiverRegion}
+                  **Address:** {receiverAddress}, {receiverDistrict},{" "}
+                  {receiverRegion},
                 </p>
               </div>
             </div>

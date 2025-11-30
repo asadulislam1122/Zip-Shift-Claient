@@ -126,6 +126,25 @@ const DashBoardLayout = () => {
                     </span>
                   </Link>
                 </li>
+                {/* Assign Riders */}
+                <li>
+                  <Link
+                    to={"/dashboard/assign-riders"}
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Assign Riders"
+                  >
+                    {/* Motor Saikel icon */}
+                    <img
+                      className="w-5"
+                      src="https://img.icons8.com/ios-filled/50/dirt-bike.png"
+                      alt=""
+                    />
+
+                    <span className="is-drawer-close:hidden">
+                      Assign Riders
+                    </span>
+                  </Link>
+                </li>
                 {/* Users Management */}
                 <li>
                   <Link

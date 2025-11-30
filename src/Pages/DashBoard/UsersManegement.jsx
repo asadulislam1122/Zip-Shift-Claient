@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useState } from "react";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { FaUserShield } from "react-icons/fa";
 import { FiShieldOff } from "react-icons/fi";
@@ -7,10 +7,11 @@ import Swal from "sweetalert2";
 
 const UsersManegement = () => {
   const axiosSecure = useAxiosSecure();
+  const [searchText, setSearchText] = useState("");
   const { data: users = [], refetch } = useQuery({
-    queryKey: ["users"],
+    queryKey: ["users", searchText],
     queryFn: async () => {
-      const res = await axiosSecure.get("/users");
+      const res = await axiosSecure.get(`/users?searchText=${searchText}`);
       return res.data;
     },
   });
@@ -52,6 +53,39 @@ const UsersManegement = () => {
       <h2 className="text-3xl font-semibold text-center p-2 text-blue-500">
         Users Management: ({users.length})
       </h2>
+
+      {/* search */}
+      <div className="p-8 text-center">
+        <p className="text-blue-500 p-2 font-semibold">
+          Search Text: <span className="text-green-600">[ {searchText} ]</span>
+        </p>
+        <label className="input ">
+          <svg
+            className="h-[1em] opacity-50"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            <g
+              strokeLinejoin="round"
+              strokeLinecap="round"
+              strokeWidth="2.5"
+              fill="none"
+              stroke="currentColor"
+            >
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.3-4.3"></path>
+            </g>
+          </svg>
+          <input
+            onChange={(e) => setSearchText(e.target.value)}
+            type="search users name"
+            required
+            placeholder="Search"
+          />
+        </label>
+      </div>
+      {/* search end */}
+
       <div className="overflow-x-auto">
         <table className="table table-zebra">
           {/* head */}

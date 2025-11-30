@@ -189,6 +189,8 @@ const Myparcels = () => {
               <th className="py-3 px-6">Receiver Name</th>
               <th className="py-3 px-6">Receiver Region</th>
               <th className="py-3 px-6">Payment Status</th>
+              <th className="py-3 px-6">TrackingId</th>
+              <th className="py-3 px-6">Delevery Status</th>
               <th className="py-3 px-6">Actions</th>
             </tr>
           </thead>
@@ -228,6 +230,8 @@ const Myparcels = () => {
                       </Link>
                     )}
                   </td>
+                  <td>{parcel.trackingId}</td>
+                  <td>{parcel.deliveryStatus}</td>
                   <td className="flex gap-2">
                     {/* View/Search Button */}
                     <button
