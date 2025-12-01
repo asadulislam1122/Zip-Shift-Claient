@@ -105,6 +105,30 @@ const DashBoardLayout = () => {
                 <span className="is-drawer-close:hidden">Payment History</span>
               </Link>
             </li>
+            {/* rider only link  */}
+            {role === "rider" && (
+              <>
+                <li>
+                  <Link
+                    to={"/dashboard/assigned-deliveries"}
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Assigned Deliveries"
+                  >
+                    {/* Motor Saikel icon */}
+                    <img
+                      className="w-5"
+                      src="https://img.icons8.com/ios-filled/50/deliver-food.png"
+                      alt=""
+                    />
+
+                    <span className="is-drawer-close:hidden">
+                      Assigned Deliveries
+                    </span>
+                  </Link>
+                </li>
+              </>
+            )}
+            {/* admin related link */}
             {role === "admin" && (
               <>
                 {/* Approve Ridser */}
