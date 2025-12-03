@@ -17,10 +17,11 @@ const AssignedDeliveries = () => {
     },
   });
   console.log(parcels);
-  const handleDelivary = (parcel) => {
+  const handleStatusDeleveridUpdate = (parcel, status) => {
     const statusInfo = {
-      deliveryStatus: "rider_arriving",
+      deliveryStatus: status,
     };
+    let message = `parcel status is update with ${status.split("_").join(" ")}`;
     axiosSecure
       .patch(`parcels/${parcel._id}/status`, statusInfo)
       .then((res) => {
@@ -29,7 +30,7 @@ const AssignedDeliveries = () => {
           Swal.fire({
             position: "top-end",
             icon: "success",
-            title: "Thank you for accepting",
+            title: message,
             showConfirmButton: false,
             timer: 1500,
           });
@@ -72,7 +73,9 @@ const AssignedDeliveries = () => {
                   {parcel.deliveryStatus === "driver_assigned" ? (
                     <>
                       <button
-                        onClick={() => handleDelivary(parcel)}
+                        onClick={() =>
+                          handleStatusDeleveridUpdate(parcel, "rider_arriving")
+                        }
                         className="btn btn-primary btn-active text-black hover:bg-green-600"
                       >
                         Accept
@@ -85,7 +88,24 @@ const AssignedDeliveries = () => {
                     <span>Accepted ✅</span>
                   )}
                 </td>
-                <td>ConFirm Pikup</td>
+                <td>
+                  <button
+                    onClick={() =>
+                      handleStatusDeleveridUpdate(parcel, "parcel_picked_up")
+                    }
+                    className="btn btn-primary btn-active btn-sm text-black hover:bg-green-600"
+                  >
+                    Mark asa Pickup
+                  </button>
+                  <button
+                    onClick={() =>
+                      handleStatusDeleveridUpdate(parcel, "parcel_delivered")
+                    }
+                    className="btn btn-sm btn-primary btn-active ml-2 text-black hover:bg-green-600"
+                  >
+                    Marks as Delivered
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>

@@ -126,6 +126,25 @@ const DashBoardLayout = () => {
                     </span>
                   </Link>
                 </li>
+                {/*  */}
+                <li>
+                  <Link
+                    to={"/dashboard/completed-deliveries"}
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Completed Deliveries"
+                  >
+                    {/* Motor Saikel icon */}
+                    <img
+                      className="w-5"
+                      src="https://img.icons8.com/ios-filled/50/task-completed.png"
+                      alt=""
+                    />
+
+                    <span className="is-drawer-close:hidden">
+                      Completed Deliveries
+                    </span>
+                  </Link>
+                </li>
               </>
             )}
             {/* admin related link */}
