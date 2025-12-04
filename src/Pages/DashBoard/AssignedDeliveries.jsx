@@ -20,6 +20,8 @@ const AssignedDeliveries = () => {
   const handleStatusDeleveridUpdate = (parcel, status) => {
     const statusInfo = {
       deliveryStatus: status,
+      riderId: parcel.riderId,
+      trackingId: parcel.trackingId,
     };
     let message = `parcel status is update with ${status.split("_").join(" ")}`;
     axiosSecure
@@ -99,7 +101,7 @@ const AssignedDeliveries = () => {
                   </button>
                   <button
                     onClick={() =>
-                      handleStatusDeleveridUpdate(parcel, "parcel_delivered")
+                      handleStatusDeleveridUpdate(parcel, "parcel_delivered ✅")
                     }
                     className="btn btn-sm btn-primary btn-active ml-2 text-black hover:bg-green-600"
                   >

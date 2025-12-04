@@ -22,6 +22,7 @@ import AssignRider from "../Raider/AssignRider";
 import AssignedDeliveries from "../Pages/DashBoard/AssignedDeliveries";
 import RiderRoute from "./RiderRoute";
 import CompletedDeliveris from "../Pages/DashBoard/CompletedDeliveris";
+import ParcelTrack from "../Pages/ParcelTrack";
 
 export const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ export const router = createBrowserRouter([
             <Covarage></Covarage>
           </PrivetRoute>
         ),
+      },
+      {
+        path: "parcel-track/:trackingId",
+        Component: ParcelTrack,
       },
       {
         path: "/raider",

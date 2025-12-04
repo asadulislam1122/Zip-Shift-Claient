@@ -37,6 +37,7 @@ districts=${selectedParcel.senderDistricts}&workStatus=available`);
       riderEmail: rider.email,
       riderName: rider.raiderName,
       parcelId: selectedParcel._id,
+      trackingId: selectedParcel.trackingId,
     };
     axiosSecure
       .patch(`/parcels/${selectedParcel._id}`, riderAssignInfo)
